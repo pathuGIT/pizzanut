@@ -3,10 +3,39 @@
 
 <?php
 error_reporting(0);
-    $query = "SELECT food_id,name,price FROM foods";
-    $result = mysqli_query($conn,$query);
+    
     $table = '';
-    $table.='<table border=1><tr><th>Food Name</th><th>Price</th><th>Ediit</th><th>Delete</th></tr>';
+    $table .= "
+        <div class='w3-row w3-padding-32' style='height:80vh'>
+            <div class='w3-quarter w3-display-container' style='height:100%'>
+                <table class='w3-table w3-display-middle' style='height:100%'>
+                    <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=1' >Pizza</a></td></tr>
+                    <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=2' >Burgers</a></td></tr>
+                    <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=3' >Pasta</a></td></tr>
+                    <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=4' >Salads</a></td></tr>
+                    <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=5' >Desserts</a></td></tr>
+                </table>
+            </div>
+            <div class='w3-rest w3-container'>
+    ";
+    $table.="<table class='w3-table' border=1><tr><th>Food Name</th><th>Price</th><th>Ediit</th><th>Delete</th></tr>";
+    $category_id = $_GET['category_id'];
+    
+    if($category_id == 1){
+        $query = "SELECT food_id,name,price FROM foods WHERE category_id = $category_id";
+    }elseif($category_id == 2){
+        $query = "SELECT food_id,name,price FROM foods WHERE category_id = $category_id";
+    }elseif($category_id == 3){
+        $query = "SELECT food_id,name,price FROM foods WHERE category_id = $category_id";
+    }elseif($category_id == 4){
+        $query = "SELECT food_id,name,price FROM foods WHERE category_id = $category_id";
+    }elseif($category_id == 5){
+        $query = "SELECT food_id,name,price FROM foods WHERE category_id = $category_id";
+    }else{
+        $query = "SELECT food_id,name,price FROM foods";
+    }
+    $result = mysqli_query($conn,$query);
+
     if($result){
         while($record = mysqli_fetch_assoc($result)){
             $name = $record['name'];
@@ -18,18 +47,21 @@ error_reporting(0);
             
         }
         $table .= '</table>';
+        $table .= "
+            </div>
+        </div>";
+
         echo $table;
     }else{
         echo"Failed";
     }
 ?>
-
 </div>
 
 
 <?php 
     $raw = $_GET['index'];
-
+    
     $update_query = "SELECT * FROM foods WHERE food_id = $raw";
     $update_result = mysqli_query($conn,$update_query);
 
@@ -60,25 +92,6 @@ error_reporting(0);
     }else{
         echo"Failed";
     }
-?>
-
-<?php
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     // Form has been submitted, process the data
-
-//     $fname = $_POST["fname"];
-//     $fprice = $_POST["fprice"];
-
-//     $submit_u_query = "UPDATE foods SET name = '$fname', price = '$fprice' WHERE food_id = $raw";
-//     $submit_u_result = mysqli_query($conn,$submit_u_query);
-
-//     if($submit_u_result){
-//         header("Location:../admin/food.php");
-//     }else{
-
-//     }
-// }
-
 ?>
 
 <?php

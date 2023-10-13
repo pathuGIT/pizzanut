@@ -41,6 +41,10 @@
             margin: 10px;
             border-radius: 5px;
         }
+        .category_a{
+            padding:50px 150px 50px 0; 
+            text-decoration:none;
+        }
     </style>
 </head>
 
@@ -51,8 +55,13 @@
         <a href="#" class="w3-bar-item w3-button" style="position: absolute; right: 0">Log Out</a>
     </div>
     <div class="w3-bar w3-border" style="display: flex; align-items: center">
-        <a href="../admin/food.php" class="w3-bar-item">Foods</a>
+        <div class='w3-quarter w3-display-container w3-border-right' style='padding-left:15px'>
+            <a href="../admin/food.php" class="w3-bar-item">Category</a>
+        </div>
+        <div class='w3-rest w3-container'>
+            <a href="../admin/food.php" class="w3-bar-item">Foods</a>
+        </div>
     </div>
 </div>
 
-<div class="w3-row w3-border" style="margin-top: 150px;">
+<div class="w3-row w3-border" style="margin-top: 85px;">
