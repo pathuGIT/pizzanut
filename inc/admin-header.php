@@ -12,39 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@900&display=swap">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-highway.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>PizzaNut</title>
     <style>
-        .my-px {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .my-display-middle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .my-content {
-            width: 80%;
-        }
-
-        .my-tangerine {
-            font-family: "Tangerine", serif;
-        }
-
-        .my-maven {
-            font-family: 'Maven Pro', sans-serif;
-        }
-        .my-round{
-            margin: 10px;
-            border-radius: 5px;
-        }
-        .category_a{
-            padding:50px 150px 50px 0; 
-            text-decoration:none;
-        }
+        
     </style>
 </head>
 
