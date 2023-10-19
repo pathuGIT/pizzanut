@@ -42,7 +42,7 @@ error_reporting(0);
             $price = $record['price'];
 
             $table .= "<tr><td>{$name}</td><td>{$price}</td>";
-            $table .= '<td><a id="u" href="../admin/food.php?index='.$record['food_id'].'"><i class="fa fa-edit" style="font-size: 15px; padding:5px;"></i></a></td>';
+            $table .= '<td><a id="u" href="../admin/food.php?index='.$record['food_id'].'" ><i class="fa fa-edit" style="font-size: 15px; padding:5px;"></i></a></td>';
             $table .= '<td><a id="d" href="../inc/delete.php?index='.$record['food_id'].'"><i class="fa fa-remove" style="font-size: 15px; padding:5px;"></i></a></td></tr>';
             
         }
@@ -67,12 +67,14 @@ error_reporting(0);
 
     $u_table = '';
     $u_table.="
+    <div id='id01' class='my-modol'>
+    <div class='my-modol-inside'>
     <form method='post' action=''> 
-    <table border=1>
+    <table border=1 class='w3-table'>
     <tr>
         <th>Food Name</th>
         <th>Price</th>
-        <th rowspan=2><input class='w3-button' id='btn' type='submit' value='Update'></th>
+        
     </tr>";
     
     if($update_result){
@@ -87,12 +89,15 @@ error_reporting(0);
                 </tr>";
      
         }
-        $u_table .= '</table></form>';
+        $u_table .= "<tr><td colspan=2><input class='w3-button' id='btn' type='submit' value='Update' style='width:100%'></td></tr>";
+        $u_table .= '</table></form></div></div>';
         echo $u_table;
     }else{
         echo"Failed";
     }
 ?>
+
+
 
 <?php
 ob_start(); // Start output buffering
