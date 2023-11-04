@@ -83,7 +83,6 @@
 
                 while ($row = mysqli_fetch_row($sql1)) {
                     echo '<tr>';
-                    echo "<td>".$row[0]."</td>";
                     echo "<td>".$row[1]."</td>";
                     echo "<td>"."<img src='../images/0$row[0] $row[1].jpg' width='100px' height='100px'>"."</td>";
                     echo "<td>".$row[2]."</td>";
