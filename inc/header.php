@@ -44,14 +44,23 @@
     </style>
 </head>
 
-<div class="w3-top">
+<div class="w3-top" style="background-color:white;">
     <div class="w3-bar w3-border">
         <a href="" class="w3-xlarge w3-button w3-hover-none">PizzaNut</a>
     </div>
     <div class="w3-bar w3-border" style="display: flex; align-items: center">
-        <a href="" class="w3-bar-item"><i class="fa fa-home" style="font-size: 25px"></i></a>
+        <a href="../user/test_user_home.php" class="w3-bar-item"><i class="fa fa-home" style="font-size: 25px"></i></a>
         <a href="" class="w3-bar-item w3-button">Categories</a>
-        <a href="" class="w3-bar-item w3-button" style="position: absolute; right: 0">Be a member</a>
+        <a href="" class="w3-bar-item w3-button" style="position: absolute; right: 0">
+            <?php
+                if($X == null){
+                    echo 'Be a member';
+                }else{
+                    echo '<a style="position:absolute; right:10px;" href="../user/profile.php">'.$un.'</a>';
+
+                }
+            ?>
+        </a>
     </div>
 </div>
 
