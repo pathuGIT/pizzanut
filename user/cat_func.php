@@ -102,40 +102,6 @@ else {
                 }
             }
         }
-
-        
-        function get_sub_cat () {
-            global $conn;
-
-            $iid= $_GET['id'];
-            $sql1=mysqli_query($conn,"SELECT food_id,name,description,price FROM foods WHERE category_id=$iid");
-
-            echo '<table style=width:100%; text-align:left;">';
-            echo '<thead style="background-color: orange; height:50px;">';
-            echo '<tr>';
-            echo '<th>ID</th>';
-            echo '<th>NAME</th>';
-            echo '<TH>IMAGE</TH>';
-            echo '<TH>DESCRIPTION</TH>';
-            echo '<TH>PRICE</TH>';
-            echo '<TH>CART</TH>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
-
-            while ($row = mysqli_fetch_row($sql1)) {
-                echo '<tr>';
-                echo "<td>".$row[0]."</td>";
-                echo "<td>".$row[1]."</td>";
-                echo "<td>"."<img src='../images/0$row[0] $row[1].jpg' width='100px' height='100px'>"."</td>";
-                echo "<td>".$row[2]."</td>";
-                echo "<td>$".$row[3]."</td>";
-                echo "<td>"."<button style='padding:10px; background-color:orange; border-radius:10px;'><a style='text-decoration:none; color:black; font-weight:bold'href='#'>Add to cart</a></button>"."</td>";
-            }
-
-            echo '</tbody>';
-            echo '</table>';
-        }
     }
 }
 
