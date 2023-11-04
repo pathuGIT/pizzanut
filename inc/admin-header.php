@@ -30,7 +30,9 @@
             <a href="../admin/food.php" class="w3-bar-item">Category</a>
         </div>
         <div class='w3-rest w3-container'>
-            <a href="../admin/food.php" class="w3-bar-item">Foods</a>
+            <a href="../admin/add_food.php" class="w3-bar-item">Food Add</a>
+            <a href="../admin/show_orders.php" class="w3-bar-item">Orders</a>
+            <a href="../admin/show_usrs.php" class="w3-bar-item">Users</a>
         </div>
     </div>
 </div>

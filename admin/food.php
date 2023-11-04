@@ -6,8 +6,8 @@ error_reporting(0);
     
     $table = '';
     $table .= "
-        <div class='w3-row w3-padding-32' style='height:80vh'>
-            <div class='w3-quarter w3-display-container' style='height:100%'>
+        <div class='w3-row w3-padding-32' style='height:80vh;'>
+            <div class='w3-quarter w3-display-container' style='height:100%; '>
                 <table class='w3-table w3-display-middle' style='height:100%'>
                     <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=1' >Pizza</a></td></tr>
                     <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=2' >Burgers</a></td></tr>
@@ -16,7 +16,7 @@ error_reporting(0);
                     <tr><td class='w3-button w3-border' style='vertical-align: middle;'><a class='category_a' href='../admin/food.php?category_id=5' >Desserts</a></td></tr>
                 </table>
             </div>
-            <div class='w3-rest w3-container'>
+            <div class='w3-twothird w3-container'>
     ";
     $table.="<table class='w3-table' border=1><tr><th>Food Name</th><th>Price</th><th>Ediit</th><th>Delete</th></tr>";
     $category_id = $_GET['category_id'];
@@ -43,7 +43,7 @@ error_reporting(0);
 
             $table .= "<tr><td>{$name}</td><td>{$price}</td>";
             $table .= '<td><a id="u" href="../admin/food.php?index='.$record['food_id'].'" ><i class="fa fa-edit" style="font-size: 15px; padding:5px;"></i></a></td>';
-            $table .= '<td><a id="d" href="../inc/delete.php?index='.$record['food_id'].'"><i class="fa fa-remove" style="font-size: 15px; padding:5px;"></i></a></td></tr>';
+            $table .= '<td><a id="d" onclick="myFunction('.$record['food_id'].')" ><i class="fa fa-remove" style="font-size: 15px; padding:5px;"></i></a></td></tr>';
             
         }
         $table .= '</table>';
@@ -57,6 +57,22 @@ error_reporting(0);
     }
 ?>
 </div>
+
+<script>
+    function myFunction(foodId) {
+
+        if (confirm("Are you sure?") == true) {
+            
+            // Use the provided foodId parameter to construct the URL
+            let url = '../admin/delete.php?index=' + foodId;
+
+            // Redirect to the constructed URL
+            window.location.href = url;
+        } else {
+
+        }
+    }
+</script>
 
 
 <?php 
