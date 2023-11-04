@@ -86,22 +86,6 @@ else {
             
         }
         
-        
-        function get_cat_name () {
-            global $conn;
-
-            $iid = $_GET['id'];
-            $sql1 = mysqli_query($conn, "SELECT name FROM categories WHERE category_id=$iid");
-
-            if (!$sql1) {
-                die('id not found!' . mysqli_error($conn));
-            } 
-            else {
-                while ($row = mysqli_fetch_row($sql1)) {
-                    echo "<td>" . $row[0] . "</td>";
-                }
-            }
-        }
     }
 }
 

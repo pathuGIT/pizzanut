@@ -12,8 +12,31 @@
         <h1 style="font-family: Maven Pro, sans-serif; margin-left: 100px; font-size:100px">
             <?php
 
-            if (isset($_POST['mi'])) {
-                get_cat_name ();
+            $h = "localhost";
+            $u = "root";
+            $p = "";
+
+            $conn = mysqli_connect($h, $u, $p);
+
+            if (!$conn) {
+                die("Connection error!<br><br>" . mysqli_error($conn));
+            } else {
+                $sql = mysqli_select_db($conn, 'pizzanut');
+
+                if (!$sql) {
+                    die('Could not connect database!<br><br>' . mysqli_error($conn));
+                } else {
+                    $iid = $_GET['id'];
+                    $sql1 = mysqli_query($conn, "SELECT name FROM categories WHERE category_id=$iid");
+
+                    if (!$sql1) {
+                        die('id not found!' . mysqli_error($conn));
+                    } else {
+                        while ($row = mysqli_fetch_row($sql1)) {
+                            echo "<td>" . $row[0] . "</td>";
+                        }
+                    }
+                }
             }
 
             ?>
@@ -48,6 +71,7 @@
                 echo '<table style=width:100%; text-align:left;">';
                 echo '<thead style="background-color: orange; height:50px;">';
                 echo '<tr>';
+                echo '<th>ID</th>';
                 echo '<th>NAME</th>';
                 echo '<TH>IMAGE</TH>';
                 echo '<TH>DESCRIPTION</TH>';
@@ -59,6 +83,7 @@
 
                 while ($row = mysqli_fetch_row($sql1)) {
                     echo '<tr>';
+                    echo "<td>".$row[0]."</td>";
                     echo "<td>".$row[1]."</td>";
                     echo "<td>"."<img src='../images/0$row[0] $row[1].jpg' width='100px' height='100px'>"."</td>";
                     echo "<td>".$row[2]."</td>";
