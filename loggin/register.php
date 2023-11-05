@@ -121,7 +121,9 @@
 
         #login_link{
             text-align: center;
+            border: 1px solid red;
         }
+
         p{
             font-size: 20px ;
         }
@@ -184,12 +186,8 @@
                     <button id="btnr" type="reset">Reset</button>
                 </td>
                 </tr>
-                <tr>
-                    <td id="login_link">
-                        <p>If you are Registered before, then <a href="login.php">Log In</a>.</p>                    
-                    </td>
-                </tr>
             </table>
+            <p>If you are Registered before, then <a href="login.php">LogIn</a>.</p>  
     </form>
         </div>
     <script>
@@ -213,7 +211,12 @@
 
     $sql = "INSERT INTO users(username,email,password) VALUES ('$u_name','$e_add','$pass');";
     $result = mysqli_query($conn, $sql);
-
+    if($result){
+        echo "<script>window.location.href = '../loggin/login.php';</script>";
+    }else{
+        echo 'Error';
+    }
+    
     }
 
 ?>  

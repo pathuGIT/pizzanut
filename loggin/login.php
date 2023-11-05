@@ -1,43 +1,37 @@
+
+<?php require_once('../inc/connect.php') ?>
 <?php
-#connection for database
-    $conn = mysqli_connect('localhost','root','','pizzanut',3308);
-        if(mysqli_connect_errno()){
-            die('Database connection filed' . mysqli_connect_error());
+
+ob_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Form has been submitted, process the data
+    $mail = $_POST["username"];
+    $pswd = $_POST["password"];
+
+    $search = "SELECT user_id,username,email,password FROM users";
+    $search_result = mysqli_query($conn,$search);
+
+    while($record = mysqli_fetch_assoc($search_result)){
+        $rname = $record['username'];
+        $rpswd = $record['password'];
+
+        if($mail == $rname && $pswd == $rpswd){
+            session_start();
+                $_SESSION['user_id'] = $record['user_id'];
+                $_SESSION['user_name'] = $record['username'];
+                
+            echo "<script>window.location.href = '../user/test_user_home.php';</script>";
+        }elseif($mail == 'admin' && $pswd == 'admin'){
+            echo "<script>window.location.href = '../admin/admin_home.php';</script>";
         }else{
-            // echo"Connected!";
         }
-?>
-
-<?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $u_name = $_POST['username'];
-        $pass = $_POST['password'];
-        $output;
-    
-        $sql = "SELECT * FROM users WHERE username='$u_name' AND password='$pass'";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            if ($row) {
-                // Successful login
-                
-                $output = "Login successful!";
-                
-            } else {
-                // Invalid login
-               
-                $output = "Invalid username or password!";
-            }
-        } else {
-            
-            // echo "Login failed.";
-            $output = "Login failed.";
-
-        }
-
 
     }
+}
+
+ob_end_flush();
+
 
 ?>
 
@@ -201,6 +195,7 @@
                     </td>
                 </tr>
             </table>
+            <p>Register with <a href="register.php">pizzanut</a></p>
     </form>
 
     <script>
@@ -210,21 +205,6 @@
                 window.location.href = "../index.html";
             });
     </script>
-    </div>
-
-
-    <script>
-    <?php if (isset($output)) { ?>
-        alert("<?php echo $output; ?>");
-        window.location.href = "../index.html"; //link to the index page
-    <?php } ?>
-    </script> 
-    
-    
-
-
-    
+</div>
 </body>
-
-
 </html>
