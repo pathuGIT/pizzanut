@@ -76,4 +76,7 @@ INSERT INTO `cart` (`user_id`, `food_id`, `quantity`, `subtotal`) VALUES
   (4, 5, 2, 7.98),
   (5, 4, 1, 5.99);
 
+ALTER TABLE orders
+ADD COLUMN payment_status VARCHAR(255);
+
 
