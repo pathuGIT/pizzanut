@@ -1,36 +1,46 @@
-
 <?php require_once('../inc/connect.php') ?>
+
 <?php
 
-ob_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Form has been submitted, process the data
-    $mail = $_POST["username"];
-    $pswd = $_POST["password"];
+        // if the form has been submitted
+        $uname = $_POST["username"];
+        $pswd = $_POST["password"];
 
-    $search = "SELECT user_id,username,email,password FROM users";
-    $search_result = mysqli_query($conn,$search);
-
-    while($record = mysqli_fetch_assoc($search_result)){
-        $rname = $record['username'];
-        $rpswd = $record['password'];
-
-        if($mail == $rname && $pswd == $rpswd){
-            session_start();
-                $_SESSION['user_id'] = $record['user_id'];
-                $_SESSION['user_name'] = $record['username'];
-                
-            echo "<script>window.location.href = '../user/test_user_home.php';</script>";
-        }elseif($mail == 'admin' && $pswd == 'admin'){
+        if ($uname == 'admin' && $pswd == 'admin') {
             echo "<script>window.location.href = '../admin/admin_home.php';</script>";
-        }else{
         }
 
-    }
-}
+        if (empty($uname) || empty($pswd)) { //validating part 
+            echo "<script>alert('Username and Password are required.');</script>";
+        } else {
+            $search = "SELECT user_id, username, email, password FROM users";
+            $search_result = mysqli_query($conn, $search);
 
-ob_end_flush();
+            $found = false;
+
+            while ($record = mysqli_fetch_assoc($search_result)) {
+                $rname = $record['username'];
+                $rpswd = $record['password'];
+
+                if ($uname == $rname && $pswd == $rpswd) {
+                    session_start();
+                    $_SESSION['user_id'] = $record['user_id'];
+                    $_SESSION['user_name'] = $record['username'];
+
+                    echo "<script>window.location.href = '../user/test_user_home.php';</script>";
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                echo "<script>alert('Invalid username or password. Please try again.');</script>";
+            }
+
+            
+        }
+    }
 
 
 ?>

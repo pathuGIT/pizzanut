@@ -1,15 +1,4 @@
-
-<?php
-#connection for database
-    $conn = mysqli_connect('localhost','root','','pizzanut',3308);
-        if(mysqli_connect_errno()){
-            die('Database connection filed' . mysqli_connect_error());
-        }else{
-            // echo"Connected!";
-        }
-?>
-
-
+<?php require_once('../inc/connect.php')?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -166,19 +155,17 @@
                 
                 <tr>
                     <td><label for="un">User Name :</label></td>
-                    <td><input type="text" name="username" placeholder="Enter User Name Here..."></td>
+                    <td><input type="text" name="username" placeholder="Enter User Name Here..." ></td>
                 </tr>
 
                 <tr>
                     <td><label for="em">E-mail Address :</label></td>
-                    <td><input type="text" name="email"
-                    placeholder="Enter Email Here..."></td>
+                    <td><input type="text" name="email" placeholder="Enter Email Here..." ></td>
                 </tr>
 
                 <tr>
                     <td><label for="p">Password :</label></td>
-                    <td><input type="password" name="password"
-                    placeholder="Enter Password Here..."></td>
+                    <td><input type="password" name="password" placeholder="Enter Password Here..." > </td>
                 </tr>
                 <tr>
                     <td colspan="2" id="btn-tr">
@@ -204,19 +191,25 @@
 <?php 
     if (isset($_POST['submit'])) {
 
-    $u_name = $_POST['username'];
-    $e_add = $_POST['email'];
-    $pass = $_POST['password'];
+        $u_name = $_POST['username'];
+        $e_add = $_POST['email'];
+        $pass = $_POST['password'];
 
-
-    $sql = "INSERT INTO users(username,email,password) VALUES ('$u_name','$e_add','$pass');";
-    $result = mysqli_query($conn, $sql);
-    if($result){
-        echo "<script>window.location.href = '../loggin/login.php';</script>";
-    }else{
-        echo 'Error';
-    }
-    
+        if (empty($u_name) || empty($e_add) || empty($pass)) {
+            echo "<script>alert('All fields are required.');</script>";
+        }
+        elseif (!filter_var($e_add, FILTER_VALIDATE_EMAIL)) {
+            echo "<script>alert('Enter Valid Email Address.');</script>";
+        }
+        else{
+            $sql = "INSERT INTO users(username,email,password) VALUES ('$u_name','$e_add','$pass');";
+            $result = mysqli_query($conn, $sql);
+            if($result){
+                echo "<script>window.location.href = '../loggin/login.php';</script>";
+            }else{
+                echo 'Error';
+            }
+        }
     }
 
 ?>  
